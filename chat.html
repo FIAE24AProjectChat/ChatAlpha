@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat-Räume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Hintergrundfarbe geändert */
+            background-image: url('img/backround.jpg'); /* Hintergrundbild hinzugefügt */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .chat-room {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: rgba(255, 255, 255, 0.8); /* Halbtransparenter Hintergrund */
+        }
+    </style>
+</head>
+<body>
+    <h1>Willkommen in den Chat-Räumen</h1>
+    <div id="chat-rooms">
+        <!-- Chaträume werden hier hinzugefügt -->
+        <div class="chat-room">
+            <h2>Allgemeiner Chat</h2>
+            <p>Chat-ID: general</p>
+            <button onclick="joinChat('general')">Betreten</button>
+        </div>
+        <div class="chat-room">
+            <h2>Kaninchenfachbau Chat</h2>
+            <p>Chat-ID: tech</p>
+            <button onclick="joinChat('tech')">Betreten</button>
+        </div>
+        <div class="chat-room">
+            <h2>Freizeit Chat</h2>
+            <p>Chat-ID: leisure</p>
+            <button onclick="joinChat('leisure')">Betreten</button>
+        </div>
+    </div>
+    <script>
+        // Überprüfen, ob der Benutzer angemeldet ist
+        if (!sessionStorage.getItem('angemeldet')) {
+            window.location.href = 'index.html'; // Weiterleitung zur Hauptseite
+        }
+
+        function joinChat(roomId) {
+            // Einfache Chatfunktion
+            const chatWindow = window.open('', roomId, 'width=400,height=400');
+            chatWindow.document.body.innerHTML = `
+                <h2>Chatraum: ${roomId}</h2>
+                <div id="chat"></div>
+                <input type="text" id="message" placeholder="Nachricht eingeben">
+                <button onclick="sendMessage()">Senden</button>
+            `;
+            const script = document.createElement('script');
+            script.innerHTML = `
+                function sendMessage() {
+                    const message = document.getElementById('message').value;
+                    const chat = document.getElementById('chat');
+                    const newMessage = document.createElement('p');
+                    newMessage.textContent = message;
+                    chat.appendChild(newMessage);
+                    document.getElementById('message').value = '';
+                }
+            `;
+            chatWindow.document.body.appendChild(script);
+
+            // Hintergrundbild für den jeweiligen Chatraum hinzufügen
+            if (roomId === 'general') {
+                chatWindow.document.body.style.backgroundImage = "url('img/AllgemeinerChat.jpg')";
+            } else if (roomId === 'tech') {
+                chatWindow.document.body.style.backgroundImage = "url('img/kaninchenbauchat.jpg')";
+            } else if (roomId === 'leisure') {
+                chatWindow.document.body.style.backgroundImage = "url('img/Freizeitchat.jpg')";
+            }
+            chatWindow.document.body.style.backgroundSize = "cover";
+            chatWindow.document.body.style.backgroundRepeat = "no-repeat";
+            chatWindow.document.body.style.backgroundAttachment = "fixed";
+        }
+
+        // Funktion für private Chats
+        function startPrivateChat(userId) {
+            const privateChatWindow = window.open('', `private_${userId}`, 'width=400,height=400');
+            privateChatWindow.document.body.innerHTML = `
+                <h2>Privater Chat mit Benutzer: ${userId}</h2>
+                <div id="private_chat"></div>
+                <input type="text" id="private_message" placeholder="Nachricht eingeben">
+                <button onclick="sendPrivateMessage()">Senden</button>
+            `;
+            const script = document.createElement('script');
+            script.innerHTML = `
+                function sendPrivateMessage() {
+                    const message = document.getElementById('private_message').value;
+                    const chat = document.getElementById('private_chat');
+                    const newMessage = document.createElement('p');
+                    newMessage.textContent = message;
+                    chat.appendChild(newMessage);
+                    document.getElementById('private_message').value = '';
+                }
+            `;
+            privateChatWindow.document.body.appendChild(script);
+
+             // Hintergrundbild für private Chats hinzufügen
+             privateChatWindow.document.body.style.backgroundImage = "url('img/PrivaterChat.jpg')";
+             privateChatWindow.document.body.style.backgroundSize = "cover";
+             privateChatWindow.document.body.style.backgroundRepeat = "no-repeat";
+             privateChatWindow.document.body.style.backgroundAttachment = "fixed";
+        }
+    </script>
+</body>
+</html>
