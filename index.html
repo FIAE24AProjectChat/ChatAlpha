@@ -13,11 +13,6 @@
     />
    
     <link rel="stylesheet" href="style.css">
-    <style>
-      html {
-        scroll-behavior: smooth;
-      }
-    </style>
   </head>
   <body>
     <img class="header-image" src="/img/Backround.jpg" />
@@ -46,15 +41,22 @@
             <button type="submit" id="anmeldebutton">Anmelden</button>
             <p>Noch nicht registriert? <a href="#" id="show-register">Registrieren</a></p>
         </form> 
+    </div>
+
+    <div id="register-popup" class="popup">
+      <div class="popup-content">
+        <span class="close" id="close-popup">×</span>
         <form id="registrationForm">
           <label for="email">E-Mail:</label>
           <input type="email" id="email" name="email" required>
           <label for="username">Benutzername:</label>
           <input type="text" id="username" name="username" required>
+          <label for="password">Passwort:</label>
+          <input type="password" id="password" name="password" required>
           <button type="submit">Registrieren</button>
         </form>
-        <div id="progressWheel" style="display:none;">Laden...</div>
-        <div id="message"></div>
+        <div id="error-message" class="error-message"></div>
+      </div>
     </div>
  
     <div class="chat-container">
@@ -105,12 +107,48 @@
         „Give someone a program; you frustrate them for a day; teach them how to program, and you frustrate them for a lifetime.“
       </div>
     </div>
+
     <script>
+      document.getElementById('show-register').addEventListener('click', function() {
+        document.getElementById('register-popup').style.display = 'block';
+      });
+
+      document.getElementById('close-popup').addEventListener('click', function() {
+        document.getElementById('register-popup').style.display = 'none';
+      });
+
+      window.addEventListener('click', function(event) {
+        if (event.target == document.getElementById('register-popup')) {
+          document.getElementById('register-popup').style.display = 'none';
+        }
+      });
+
       document.getElementById('anmeldebutton').addEventListener('click', function(event) {
         event.preventDefault();
         document.getElementById('anmeldung').scrollIntoView({ behavior: 'smooth' });
       });
+
+      document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var username = document.getElementById('username').value;
+        var errorMessage = document.getElementById('error-message');
+
+        // AJAX request to check if username exists
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/check-username', true);
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.exists) {
+              errorMessage.textContent = 'Benutzername bereits vergeben. Bitte wählen Sie einen anderen.';
+            } else {
+              document.getElementById('registrationForm').submit();
+            }
+          }
+        };
+        xhr.send(JSON.stringify({ username: username }));
+      });
     </script>
-    </div>
   </body>
 </html>
