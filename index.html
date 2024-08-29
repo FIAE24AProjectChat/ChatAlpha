@@ -20,7 +20,7 @@
       <img src="img/Logo.png" />
  
       <div class="navigation">
-        <a class="menu-link" href="">Home</a>
+        <a class="menu-link" href="index.html">Home</a>
         <a class="menu-link" href="#anmeldung">Anmeldung</a>
         <a class="menu-link" href="Kontakt.html">Kontakt</a>
         <a class="menu-link" href="F&A.html">F&A</a>
@@ -133,7 +133,7 @@
         var username = document.getElementById('username').value;
         var errorMessage = document.getElementById('error-message');
 
-        // AJAX request to check if username exists
+       // AJAX Anfrage um zu überprüfen ob Benutzername bereits existiert
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '/check-username', true);
         xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
