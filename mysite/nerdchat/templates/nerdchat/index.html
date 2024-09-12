@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NubGeek Community</title>
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+   
+    <link href="{% static 'nerdchat/css/style.css' %}" rel="stylesheet">
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body>
+    <img class="header-image" src="{%static 'nerdchat/images/backround.jpg' %}" />
+    <div class="container">
+      <img src="{%static 'nerdchat/images/Logo.png' %}" />
+ 
+      <div class="navigation">
+        <a class="menu-link" href="">Home</a>
+        <a class="menu-link" href="#anmeldung">Anmeldung</a>
+        <a class="menu-link" href="{% url 'kontakt' %}">Kontakt</a>
+        <a class="menu-link" href="{% url 'f_a' %}">F&A</a>
+        <a class="menu-link button" href="{% url 'chat' %}">Chaträume</a>
+        <a class="menu-link" href="{% url 'impressum' %}">Impressum</a>
+      </div>
+    </div>
+ 
+    <h1 class="headline">
+      Eure <span class="orange">Chat Community</span> für IT Newbies!
+    </h1>
+ 
+    <div class="login-container" id="anmeldung">
+        <h2>Anmeldung</h2>
+        <form id="login-form" action="/login" method="post">
+            <input type="text" name="username" placeholder="Benutzername" required>
+            <input type="password" name="password" placeholder="Passwort" required>
+            <button type="submit" id="anmeldebutton">Anmelden</button>
+            <p>Noch nicht registriert? <a href="#" id="show-register">Registrieren</a></p>
+        </form> 
+        <form id="registrationForm">
+          <label for="email">E-Mail:</label>
+          <input type="email" id="email" name="email" required>
+          <label for="username">Benutzername:</label>
+          <input type="text" id="username" name="username" required>
+          <button type="submit">Registrieren</button>
+        </form>
+        <div id="progressWheel" style="display:none;">Laden...</div>
+        <div id="message"></div>
+    </div>
+ 
+    <div class="chat-container">
+        <div class="chat-room" id="main-chat">
+            <!-- Hauptchatraum -->
+        </div>
+        <div class="chat-room" id="private-chat">
+            <!-- Privater Chatraum -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-message" placeholder="Nachricht eingeben...">
+            <button onclick="sendMessage()">Senden</button>
+        </div>
+    </div>
+ 
+    <h2>Anfahrt</h2>
+    <div class="description-section">
+      <div class="half-width">
+        Progammierer: Eine Person, die in der Lage ist Probleme zu lösen, von denen du noch nicht einmal gewusst hast,
+        dass diese existieren, auf eine Art und Weise, die du niemals verstehen wirst.
+        Siehe auch: Superheld, Zauberer, Gott.
+      </div>
+      <iframe
+        class="half-width"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d616210.0499762874!2d7.82619033648833!3d52.89315369936682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b073161a31185d%3A0x1126401b2c75a098!2sIBB%20Institut%20f%C3%BCr%20Berufliche%20Bildung%20AG!5e0!3m2!1sde!2sde!4v1720434056944!5m2!1sde!2sde"
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+ 
+    <h2>Video</h2>
+    <div class="description-section">
+      <div class="video-container">
+        <iframe
+          class="youtube"
+          src="https://www.youtube.com/embed/EAIEqDT63tg?si=XFD2yay13DVtBZi4"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+ 
+      <div class="half-width">
+        „Give someone a program; you frustrate them for a day; teach them how to program, and you frustrate them for a lifetime.“
+      </div>
+    </div>
+    <script>
+      document.getElementById('anmeldebutton').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('anmeldung').scrollIntoView({ behavior: 'smooth' });
+      });
+    </script>
+    </div>
+  </body>
+</html>

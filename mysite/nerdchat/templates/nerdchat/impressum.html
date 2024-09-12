@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressum - NubGeek Community</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-image: url({%static 'nerdchat/images/Backroundsubseiten.jpg' %});
+      background-size: cover;
+      background-attachment: fixed;
+      font-family: Arial, sans-serif;
+      color: #fdfbf9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .header-logo {
+      height: 105px; /* Halb so groß wie vorher */
+    }
+    h1, h2 {
+      text-align: center;
+      color: #eb6e08;
+    }
+    p, ul {
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+      text-align: center; /* Text linksbündig */
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    ul li {
+      margin-bottom: 10px;
+    }
+    a {
+      color: #df610d;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="{%static 'nerdchat/images/Logo.png' %}" alt="NubGeek Logo" class="header-logo">
+    <div class="navigation">
+      <a class="menu-link" href="{% url 'index' %}">Home</a>
+      <!-- Weitere Navigationslinks hier -->
+    </div>
+  </header>
+  <h1>Impressum</h1>
+  <p>Angaben gemäß § 5 TMG:</p>
+  <p>NubGeek Community<br>
+  Musterstraße 1<br>
+  12345 Musterstadt<br>
+  Deutschland</p>
+  
+  <h2>Vertreten durch:</h2>
+  <p>Max Mustermann</p>
+  
+  <h2>Kontakt:</h2>
+  <ul>
+    <li>Telefon: +49 123 456 789</li>
+    <li>Email: <a href="mailto:info@nubgeek.com">info@nubgeek.com</a></li>
+  </ul>
+  
+  <h2>Haftungsausschluss:</h2>
+  <p>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Copyright by Team NUBGeek, Benjamin Schweikert, Carmen Kraft, Stefanie Schatz & Arthur Bruin</p>
+</body>
+</html>
